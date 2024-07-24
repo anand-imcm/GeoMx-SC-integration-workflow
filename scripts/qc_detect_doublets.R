@@ -1,14 +1,3 @@
-if (!requireNamespace("optparse", quietly = TRUE)) {
-    install.packages("optparse")
-}
-if (!requireNamespace("Seurat", quietly = TRUE)) {
-    BiocManager::install("Seurat")
-}
-
-if (!requireNamespace("scDblFinder", quietly = TRUE)) {
-    BiocManager::install("scDblFinder")
-}
-
 library("optparse")
 library("Seurat")
 library("SingleCellExperiment")
@@ -31,13 +20,6 @@ if (is.null(opt$sample)){
     print_help(opt_parser)
     stop("Input sample ID is mandatory", call.=FALSE)
 }
-
-print(opt)
-
-# prefix string
-# path to the filtered_feature_bc_matrix/ dir
-
-print(paste(opt$data, '/filtered_feature_bc_matrix', sep=''))
 
 eislet <- Read10X(paste(opt$data, '/filtered_feature_bc_matrix', sep=''))
 eislet = as.data.frame(eislet)
