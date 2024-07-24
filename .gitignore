@@ -1,5 +1,8 @@
-notes-comments.txt
-test/
-
 *.Rproj*
-
+data/
+test/
+cromwell-*/
+*.md
+.git
+notes-comments.txt
+__pycache__
