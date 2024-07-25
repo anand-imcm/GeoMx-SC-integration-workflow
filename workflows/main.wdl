@@ -11,7 +11,6 @@ workflow main {
         input: data = dataset, prefix = prefix
     }
     output {
-        File matrix_qc = quality_check.matrix_qc
-        File cells_qc = quality_check.cells_qc
+        File qc_matrix = quality_check.out
     }
 }
