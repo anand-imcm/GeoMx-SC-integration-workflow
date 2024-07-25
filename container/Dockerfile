@@ -21,6 +21,6 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 
 RUN R -e "install.packages('BiocManager')"
 
-RUN R -e "BiocManager::install(c('optparse', 'scDblFinder', 'Seurat'))"
+RUN R -e "BiocManager::install(c('optparse', 'scDblFinder', 'Seurat', 'data.table'))"
 
 COPY ./scripts /scripts
