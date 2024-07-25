@@ -8,17 +8,19 @@ task quality_check {
         Int memory_gb = 16
         Int cpu = 16
     }
-    # Int disk_size_gb = ceil(size(data, "GB")) + 2
+    Int disk_size = ceil(size(data, "GiB")) + 2
     command <<<
-        ln -s ~{data} ~{prefix}.tar.gz
         tar -xzvf ~{prefix}.tar.gz
-        ls .
         Rscript /scripts/qc_detect_doublets.R -s ~{prefix}
     >>>
+    output {
+        File matrix_qc = prefix + "_Gene_Expression_Matrix_passed_QC_noDoublet.txt"
+        File cells_qc = prefix + "_Cells_passed_QC_noDoublet.txt"
+    }
     runtime {
         docker: "~{docker}"
         cpu: "~{cpu}"
-        memory: "~{memory_gb}GB"
-        # disks: "local-disk ~{disk_size_gb} HDD"
+        memory: "~{memory_gb} GB"
+        disks: "local-disk ~{disk_size} HDD"
     }
 }
