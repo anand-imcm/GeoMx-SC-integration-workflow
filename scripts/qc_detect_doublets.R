@@ -2,6 +2,7 @@ library("optparse")
 library("Seurat")
 library("SingleCellExperiment")
 library("scDblFinder")
+library("data.table")
 
 option_list = list(
     make_option(c("-d", "--data"), type="character", default=".", help="Path to the parent directory containing 'filtered_feature_bc_matrix' dir", metavar="character"),
