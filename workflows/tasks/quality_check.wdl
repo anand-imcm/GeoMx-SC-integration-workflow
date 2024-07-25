@@ -11,7 +11,7 @@ task quality_check {
     Int disk_size = ceil(size(data, "GiB")) + 2
     command <<<
         ln -s ~{data} ~{prefix}.tar.gz
-        tar -xzvf ~{prefix}.tar.gz
+        tar -xzvf ~{prefix}.tar.gz && rm ~{prefix}.tar.gz
         Rscript /scripts/qc_detect_doublets.R -s ~{prefix}
         tar -czvf ~{prefix}_qc.tar.gz *_passed_QC_noDoublet.txt 
     >>>
