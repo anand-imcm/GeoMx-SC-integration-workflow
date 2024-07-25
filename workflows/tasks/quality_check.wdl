@@ -10,12 +10,13 @@ task quality_check {
     }
     Int disk_size = ceil(size(data, "GiB")) + 2
     command <<<
+        ln -s ~{data} ~{prefix}.tar.gz
         tar -xzvf ~{prefix}.tar.gz
         Rscript /scripts/qc_detect_doublets.R -s ~{prefix}
+        tar -czvf ~{prefix}_qc.tar.gz *_passed_QC_noDoublet.txt 
     >>>
     output {
-        File matrix_qc = prefix + "_Gene_Expression_Matrix_passed_QC_noDoublet.txt"
-        File cells_qc = prefix + "_Cells_passed_QC_noDoublet.txt"
+        File out = prefix + "_qc.tar.gz"
     }
     runtime {
         docker: "~{docker}"
