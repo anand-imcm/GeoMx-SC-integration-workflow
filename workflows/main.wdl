@@ -13,7 +13,7 @@ workflow main {
     }
     scatter (sample_tar in extract_data.samples_tar) {
         call qc.quality_check {
-            input: data = sample_tar, prefix = prefix
+            input: data = sample_tar
         }
     }
 
