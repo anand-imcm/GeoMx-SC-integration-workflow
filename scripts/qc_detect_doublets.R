@@ -61,4 +61,4 @@ eislet[1:5,1:5]
 dim(eislet)
 
 fwrite(eislet, paste(opt$sample, '_Gene_Expression_Matrix_passed_QC_noDoublet.txt', sep = ''), quote = F, row.names = F, col.names = T, sep = '\t')
-write.table(colnames((assay(sce))), paste(opt$sample, '_Cells_passed_QC_noDoublet.txt', sep = ''), quote = F, row.names = F, col.names = T, sep = '\t')
+fwrite(colnames((assay(sce))), paste(opt$sample, '_Cells_passed_QC_noDoublet.txt', sep = ''), quote = F, row.names = F, col.names = T, sep = '\t')
