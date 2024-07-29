@@ -10,12 +10,12 @@ task quality_check {
     Int disk_size = ceil(size(data, "GiB")) + 2
     command <<<
         filename=$(basename ~{data})
-        base="${filename%%.*}"
+        base="${filename%%_*}" 
         ln -s ~{data} ${base}.tar.gz
         tar -xzvf ${base}.tar.gz && rm ${base}.tar.gz
         Rscript /scripts/qc_detect_doublets.R -s ${base}
-        tar -czvf ${base}_qc.tar.gz *_passed_QC_noDoublet.txt
-        echo "${base}_qc.tar.gz" > output_filename.txt
+        tar -czvf ${base}.tar.gz *_passed_QC_noDoublet.txt
+        echo "${base}.tar.gz" > output_filename.txt
     >>>
     output {
         File out = read_string("output_filename.txt")
